@@ -7,7 +7,7 @@ import OrderItem from '../../components/OrderItem'
 
 const OrdersScreen = (props) => {
   const orders = useSelector((state) => state.order.orders)
-  orders.sort((a, b) => (a.id < b.id ? 1 : -1))
+  orders.sort((a, b) => (a.readableDate > b.readableDate ? 1 : -1))
   return (
     <FlatList
       data={orders}
