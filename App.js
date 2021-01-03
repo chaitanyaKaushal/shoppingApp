@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { combineReducers, createStore } from 'redux'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
 import productsReducers from './centralstore/reducers/products'
 import { Provider } from 'react-redux'
 import ShopNavigator from './navigation/shopNavigator'
@@ -10,6 +10,8 @@ import cartReducer from './centralstore/reducers/cart'
 import orderReducer from './centralstore/reducers/order'
 import { LogBox } from 'react-native'
 LogBox.ignoreAllLogs()
+
+import ReduxThunk from 'redux-thunk'
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -24,7 +26,7 @@ const rootReducer = combineReducers({
   order: orderReducer,
 })
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false)
