@@ -3,10 +3,11 @@ export const SET_ORDERS = 'SET_ORDERS'
 import Order from '../../models/order'
 
 export const fetchOrders = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
+      const userId = getState().auth.userId
       const resp = await fetch(
-        'https://shopping-app-firebase-default-rtdb.firebaseio.com/orders/u1.json'
+        `https://shopping-app-firebase-default-rtdb.firebaseio.com/orders/${userId}.json`
       )
       if (!resp.ok) {
         //could do what is wrong here... but i am throwing an error
@@ -34,11 +35,13 @@ export const fetchOrders = () => {
 }
 
 export const addOrder = (cartItems, totalAmount) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token
+    const userId = getState().auth.userId
     //any async code you want!
     const date = new Date().toISOString()
     const resp = await fetch(
-      'https://shopping-app-firebase-default-rtdb.firebaseio.com/orders/u1.json',
+      `https://shopping-app-firebase-default-rtdb.firebaseio.com/orders/${userId}.json?auth=${token}`,
       {
         method: 'POST',
         headers: {

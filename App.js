@@ -3,11 +3,12 @@ import { StyleSheet, Text, View } from 'react-native'
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import productsReducers from './centralstore/reducers/products'
 import { Provider } from 'react-redux'
-import ShopNavigator from './navigation/shopNavigator'
+import NavigationContainer from './navigation/NavigationContainer'
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
 import cartReducer from './centralstore/reducers/cart'
 import orderReducer from './centralstore/reducers/order'
+import authReducer from './centralstore/reducers/auth'
 import { LogBox } from 'react-native'
 LogBox.ignoreAllLogs()
 
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   products: productsReducers,
   cart: cartReducer,
   order: orderReducer,
+  auth: authReducer,
 })
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
@@ -42,7 +44,8 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <ShopNavigator />
+      <NavigationContainer />
+      {/* redux works under its child components only */}
     </Provider>
   )
 }
