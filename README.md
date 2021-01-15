@@ -1,3 +1,9 @@
-# A shopping mobile application.
+# A shopping mobile application 
+where sellers post their products and buyers could buy them from the store.
+The app maintains user's orders history and cart-items, thus providing a nice UX.
+A seller could access his protected resources via admin privilidges specific to his own products.
+A seller could create an advertisement of his product, edit it and delete it as well.
+Moreover, Signin/Signup is fabricated in the app.
+The user-authentication is powered with firebase and redux.
 
 Demo for the app will be uploaded soon.
